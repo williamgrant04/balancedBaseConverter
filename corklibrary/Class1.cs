@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace corklibrary {
-    public static class ArrayC {
+    public static class CorkLibrary {
         public static T[] RemoveAt<T>(this T[] arg,int index) {
             List<T> list = arg.ToList();
 
@@ -15,6 +15,10 @@ namespace corklibrary {
         public static char[] ToArray(this int num) {
             string str = num.ToString();
             return str.ToArray();
+        }
+
+        public static int ToInt32(this string str) {
+            return Convert.ToInt32(str);
         }
     }
 }
