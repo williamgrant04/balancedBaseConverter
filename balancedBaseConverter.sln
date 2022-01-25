@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "balancedBaseConverter", "balancedBaseConverter\balancedBaseConverter.csproj", "{60F8EC3D-B0B4-4EEE-A4E1-F242F5494F72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "corklibrary", "corklibrary\corklibrary.csproj", "{DAFAD020-C261-4664-8AD3-65EEAE68BEB5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60F8EC3D-B0B4-4EEE-A4E1-F242F5494F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60F8EC3D-B0B4-4EEE-A4E1-F242F5494F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60F8EC3D-B0B4-4EEE-A4E1-F242F5494F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60F8EC3D-B0B4-4EEE-A4E1-F242F5494F72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAFAD020-C261-4664-8AD3-65EEAE68BEB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAFAD020-C261-4664-8AD3-65EEAE68BEB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAFAD020-C261-4664-8AD3-65EEAE68BEB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAFAD020-C261-4664-8AD3-65EEAE68BEB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E849F28A-4573-477F-AE4E-68A1A1156119}
+	EndGlobalSection
+EndGlobal
