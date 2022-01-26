@@ -6,12 +6,14 @@ using corklibrary;
 namespace balancedBaseConverter {
     static class Program {
         static void Main(string[] args) {
-            //Console.Write("Enter a base: ");
-            //int eBase = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter a number to convert: ");
-            int number = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine(number.ToBase(3));
-            Console.WriteLine(number.ToBalancedBase(3));
+            while (true) {
+                Console.Write("Enter a base: ");
+                int eBase = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter a number to convert: ");
+                int number = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine(number.ToBase(eBase));
+                Console.WriteLine(number.ToBalancedBase(eBase));
+            }
         }
 
         public static int ToBase(this int num, int eBase) {
@@ -33,13 +35,13 @@ namespace balancedBaseConverter {
             List<int> unbalanced = new List<int>();
             List<string> bal = new List<string>();
 
+            #region Convert the base10 number into chosen base
             while (num != 0) {
                 unbalanced.Add(num % eBase);
                 num /= eBase;
             }
-            unbalanced.Reverse();
-
             int uCount = unbalanced.Count();
+            #endregion
 
             #region Getting the numbers that the base uses in a balanced form
             for (int i = 0; i < eBase/2; i++) {
@@ -53,35 +55,25 @@ namespace balancedBaseConverter {
             balBase.Reverse();
             #endregion
 
-            Console.WriteLine(string.Join("", unbalanced));
-
             for (int k = 0; k < uCount; k++) {
                 if ((unbalanced[k] > balBase.Last()) && (unbalanced[k] != eBase)) {
                     unbalanced[k] -= eBase;
-                    Console.WriteLine("T: " + string.Join("", unbalanced) + $" {k}");
                     try {
                         unbalanced[k + 1] += 1;
-                        Console.WriteLine("T: " + string.Join("", unbalanced) + $" {k}");
                     } catch {
-                        unbalanced.Add(1);
-                        Console.WriteLine("T: " + string.Join("", unbalanced) + $" {k}");
+                        unbalanced.Add(1);   
                     }
-                    Console.WriteLine("T: " + string.Join("", unbalanced) + $" {k}");
                 } else if (unbalanced[k] == eBase) {
                     unbalanced[k] = 0;
-                    Console.WriteLine("B: " + string.Join("", unbalanced) + $" {k}");
                     try {
                         unbalanced[k + 1] += 1;
-                        Console.WriteLine("B: " + string.Join("", unbalanced) + $" {k}");
                     } catch {
-                        unbalanced.Add(1);
-                        Console.WriteLine("B: " + string.Join("", unbalanced) + $" {k}");
+                        unbalanced.Add(1);   
                     }
-                    Console.WriteLine("B: " + string.Join("", unbalanced) + $" {k}");
                 }
             }
-            
 
+            unbalanced.Reverse();
             return string.Join("", unbalanced);
         }
     }
