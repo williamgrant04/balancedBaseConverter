@@ -10,15 +10,14 @@ namespace balancedBaseConverter {
             //int eBase = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter a number to convert: ");
             int number = Convert.ToInt32(Console.ReadLine());
-            Console.Write(number.ToBase(3));
-            Console.Write("\n" + number.ToBalancedBase(3));
+            Console.WriteLine(number.ToBase(3));
+            Console.WriteLine(number.ToBalancedBase(3));
         }
 
-        public static int ToBase(this int num, int eBase, bool balanced = false) {
+        public static int ToBase(this int num, int eBase) {
             char[] number = num.ToArray();
-            if (!balanced)
-                if (number[0] == '-')
-                    throw new ArgumentException("Number cannot be negative, try ToBalancedBase instead.");
+            if (number[0] == '-')
+                throw new ArgumentException("Number cannot be negative, try ToBalancedBase instead.");
 
             List<int> converted = new List<int>();
 
@@ -26,35 +25,64 @@ namespace balancedBaseConverter {
                 converted.Add(num % eBase);
                 num /= eBase;
             }
-
-            if (balanced) {
-                return num.ToBalancedBase(eBase);
-            } else {
-                return Convert.ToInt32(String.Join("", converted));
-            }
-
+            converted.Reverse();
+            return Convert.ToInt32(String.Join("", converted));
         }
 
-        public static int ToBalancedBase(this int num, int eBase) {
+        public static string ToBalancedBase(this int num, int eBase) {
             List<int> unbalanced = new List<int>();
-            List<string> balBase = new List<string>();
+            List<string> bal = new List<string>();
 
             while (num != 0) {
                 unbalanced.Add(num % eBase);
                 num /= eBase;
             }
+            unbalanced.Reverse();
+
+            int uCount = unbalanced.Count();
 
             #region Getting the numbers that the base uses in a balanced form
             for (int i = 0; i < eBase/2; i++) {
-                balBase.Add(Convert.ToString(i+1));
+                bal.Add(Convert.ToString(i+1));
             }
-            balBase.Add("0");
+            bal.Add("0");
             for (int j = 0; j < eBase/2; j++) {
-                balBase.Add("-" + Convert.ToString(j + 1));
+                bal.Add("-" + Convert.ToString(j + 1));
             }
+            List<int> balBase = bal.Select(str => Convert.ToInt32(str)).ToList();
+            balBase.Reverse();
             #endregion
 
+            Console.WriteLine(string.Join("", unbalanced));
 
+            for (int k = 0; k < uCount; k++) {
+                if ((unbalanced[k] > balBase.Last()) && (unbalanced[k] != eBase)) {
+                    unbalanced[k] -= eBase;
+                    Console.WriteLine("T: " + string.Join("", unbalanced) + $" {k}");
+                    try {
+                        unbalanced[k + 1] += 1;
+                        Console.WriteLine("T: " + string.Join("", unbalanced) + $" {k}");
+                    } catch {
+                        unbalanced.Add(1);
+                        Console.WriteLine("T: " + string.Join("", unbalanced) + $" {k}");
+                    }
+                    Console.WriteLine("T: " + string.Join("", unbalanced) + $" {k}");
+                } else if (unbalanced[k] == eBase) {
+                    unbalanced[k] = 0;
+                    Console.WriteLine("B: " + string.Join("", unbalanced) + $" {k}");
+                    try {
+                        unbalanced[k + 1] += 1;
+                        Console.WriteLine("B: " + string.Join("", unbalanced) + $" {k}");
+                    } catch {
+                        unbalanced.Add(1);
+                        Console.WriteLine("B: " + string.Join("", unbalanced) + $" {k}");
+                    }
+                    Console.WriteLine("B: " + string.Join("", unbalanced) + $" {k}");
+                }
+            }
+            
+
+            return string.Join("", unbalanced);
         }
     }
 }
